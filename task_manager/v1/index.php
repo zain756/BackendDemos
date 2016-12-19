@@ -2,13 +2,13 @@
  
 require_once '../include/DbHandler.php';
 require_once '../include/PassHash.php';
-//require '.././libs/Vendor/Slim/Slim.php';
+//require '../libs/Vendor/Slim/Slim.php';
 require '../libs/vendor/autoload.php';
  
-//\Slim\Slim::registerAutoloader();
+//Slim\Slim::registerAutoloader();
  
-//$app = new \Slim\Slim();
-$app = new \Slim\App;
+$app = new \Slim\Slim();
+//$app = new \Slim\App;
  
 // User id from db - Global Variable
 $user_id = NULL;
