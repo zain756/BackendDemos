@@ -1,14 +1,15 @@
 CREATE TABLE IF NOT EXISTS `library` (
  
- `book_id` int(11) NOT NULL,
+ `book_id` int(11) NOT NULL AUTO_INCREMENT,
  
  `book_name` varchar(100) NOT NULL,
  
  `book_isbn` varchar(100) NOT NULL,
  
- `book_category` varchar(100) NOT NULL
+ `book_category` varchar(100) NOT NULL,
+ PRIMARY KEY (`book_id`)
  
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+);
  
 INSERT INTO `library` (`book_id`, `book_name`, `book_isbn`, `book_category`) VALUES
  

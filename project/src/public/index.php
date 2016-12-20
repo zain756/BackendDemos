@@ -1,6 +1,6 @@
 <?php
-use \Psr\Http\Message\ServerRequestInterface as Request;
-use \Psr\Http\Message\ResponseInterface as Response;
+//use \Psr\Http\Message\ServerRequestInterface as Request;
+//use \Psr\Http\Message\ResponseInterface as Response;
 
 require '../vendor/autoload.php';
 
@@ -11,9 +11,14 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
     $response->getBody()->write("Hello, $name");
 
     return $response;
-});*/
+});
+*/
+$app->get('/hello/{name}', function ( $request,  $response) {
+    $name = $request->getAttribute('name');
+    $response->getBody()->write("Hello, $name");
 
-
+    return $response;
+});
 
 $app->get('/books', function() {
  include("db_connect.php");
@@ -46,6 +51,7 @@ $app->post('/books', function($request){
  $book_category = $request->getParsedBody()['book_category'];
  
   $stmt->execute();
+  
  
 /*
    $book_name = $request->getParsedBody()['book_name'];
