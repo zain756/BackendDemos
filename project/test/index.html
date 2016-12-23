@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h3>Post Request Testing</h3>
+<form action="../src/public/books" method = "post"  target = "_blank">
+  Book name:<br>
+  <input type="text" name="book_name" value="Mickey">
+  <br>
+  Book name:<br>
+  <input type="text" name="book_isbn" value="Mouse"><br>
+   Book category:<br>
+  <input type="text" name="book_category" value="Mouse">
+  <br><br>
+  <input type="submit" value="Submit">
+</form> 
+
+
+<h3>Get Request Testing</h3>
+<form method = "get" action="../src/public/books" target = "_blank">
+	<input type="submit" value="view all books" >
+</form>
+
+
+<h3>Put Request Testing</h3>
+<form action="../src/public/books" method = "post"  target = "_blank">
+
+
+ <input type="hidden" name="_method" value="put" >
+ Book id:<br>
+  <input type="text" name="book_id" value="6" > <br>
+  
+  Book name:<br>
+  <input type="text" name="book_name" value="Mickey">
+  <br>
+  Book name:<br>
+  <input type="text" name="book_isbn" value="Mouse"><br>
+   Book category:<br>
+  <input type="text" name="book_category" value="Mouse">
+  <br><br>
+  <input type="submit" value="Submit" formaction="../src/public/books/6">
+</form> 
+
+</body>
+</html>

@@ -14,10 +14,10 @@ $app->get('/hello/{name}', function (Request $request, Response $response) {
 });
 */
 $app->get('/hello/{name}', function ( $request,  $response) {
-    $name = $request->getAttribute('name');
-    $response->getBody()->write("Hello, $name");
+  $name = $request->getAttribute('name');
+  $response->getBody()->write("Hello, $name");
 
-    return $response;
+  return $response;
 });
 
 $app->get('/books', function() {
@@ -33,26 +33,38 @@ $app->get('/books', function() {
 });
 
 
-$app->post('/books', function($request){
- 
+$app->post('/books[/{book_id}]', function($request){
+
  include("db_connect.php");
- //echo 'testing';
+ $_method = null;
  
+ if (array_key_exists ('_method', $request->getParsedBody())){
+  $_method = $request->getParsedBody()['_method'];
+  //echo $_method."<br>";
+  if ($_method === "put"){
+   putmethodHandler($request);
+  }
+}
+
+  
+//$_method = $request->getParsedBodyParam($key, $default = null);
+
+else{
  $query = "INSERT INTO library (book_name,book_isbn,book_category) VALUES (?,?,?)";
- 
+
  $stmt = $conn->prepare($query);
- 
+
  $stmt->bind_param("sss",$book_name,$book_isbn,$book_category);
- 
+
  $book_name = $request->getParsedBody()['book_name'];
  echo $book_name;
  $book_isbn = $request->getParsedBody()['book_isbn'];
- 
+
  $book_category = $request->getParsedBody()['book_category'];
- 
-  $stmt->execute();
-  
- 
+
+ $stmt->execute();
+}
+
 /*
    $book_name = $request->getParsedBody()['book_name'];
    echo  $book_name."<br>";
@@ -95,6 +107,27 @@ $app->put('/books/{book_id}', function($request){
 
 });
 
+function putmethodHandler($request){
+
+  include('db_connect.php');
+
+  $get_id = $request->getAttribute('book_id');
+  echo $get_id."<br>";
+  $query = "UPDATE library SET book_name = ?, book_isbn = ?, book_category = ? WHERE book_id = $get_id";
+
+  $stmt = $conn->prepare($query);
+
+  $stmt->bind_param("sss",$book_name,$book_isbn,$book_category);
+
+  $book_name = $request->getParsedBody()['book_name'];
+  echo $book_name."<br>";
+  $book_isbn = $request->getParsedBody()['book_isbn'];
+  echo $book_isbn."<br>";
+  $book_category = $request->getParsedBody()['book_category'];
+  echo $book_category."<br>";
+  $stmt->execute();
+
+}
 /*
 $app->delete('/books/{book_id}', function($request){
  //require_once('db_connect.php');
